@@ -14,6 +14,11 @@ setTasks([...tasks, task]);
 setTask("");
 };
 
+const deleteTask = (index) => {
+const newTasks = tasks.filter((_, i) => i !== index);
+setTasks(newTasks);
+};
+
 return (
 <div>
 
@@ -36,7 +41,10 @@ onChange={(e) => setTask(e.target.value)}
 
 <ul>
 {tasks.map((t,index)=>(
-<li key={index}>{t}</li>
+<li key={index}>
+{t}
+<button onClick={()=>deleteTask(index)}> Delete </button>
+</li>
 ))}
 </ul>
 
