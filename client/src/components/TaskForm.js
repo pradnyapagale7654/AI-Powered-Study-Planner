@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function TaskForm() {
 
 const [task, setTask] = useState("");
+const [date, setDate] = useState("");
 const [tasks, setTasks] = useState([]);
 
 const handleSubmit = (e) => {
@@ -10,8 +11,10 @@ e.preventDefault();
 
 if(task === "") return;
 
-setTasks([...tasks, task]);
+setTasks([...tasks, {task, date}]);
+
 setTask("");
+setDate("");
 };
 
 const deleteTask = (index) => {
@@ -33,6 +36,12 @@ value={task}
 onChange={(e) => setTask(e.target.value)}
 />
 
+<input
+type="date"
+value={date}
+onChange={(e)=>setDate(e.target.value)}
+/>
+
 <button type="submit">Add</button>
 
 </form>
@@ -42,7 +51,7 @@ onChange={(e) => setTask(e.target.value)}
 <ul>
 {tasks.map((t,index)=>(
 <li key={index}>
-{t}
+{t.task} — {t.date}
 <button onClick={()=>deleteTask(index)}> Delete </button>
 </li>
 ))}
